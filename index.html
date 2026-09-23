@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Professional Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg, #667eea, #764ba2);
+
+            transition: 0.4s;
+        }
+
+        /* Main container */
+
+        .container {
+            width: 380px;
+            padding: 35px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            border-radius: 20px;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+
+            color: white;
+
+            animation: appear 0.8s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: white;
+
+            border-radius: 50%;
+
+            font-size: 32px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 25px;
+
+            opacity: 0.8;
+
+            font-size: 14px;
+        }
+
+        /* Input */
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 6px;
+
+            font-size: 14px;
+        }
+
+        .input-box input {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        /* Password */
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 50px;
+        }
+
+        .eye {
+            position: absolute;
+
+            right: 15px;
+            top: 13px;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+        /* Options */
+
+        .options {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 13px;
+
+            margin: 15px 0;
+        }
+
+        .remember {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .forgot {
+            cursor: pointer;
+
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+
+        button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-top: 8px;
+
+            transition: 0.2s;
+        }
+
+        .login-btn {
+            background: white;
+
+            color: #5b4bb7;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .signup-btn {
+            background: transparent;
+
+            color: white;
+
+            border: 1px solid white;
+        }
+
+        .signup-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .theme-btn {
+            background: rgba(0,0,0,0.2);
+
+            color: white;
+        }
+
+        /* Message */
+
+        #message {
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-size: 14px;
+        }
+
+        /* Welcome */
+
+        #welcome {
+            display: none;
+
+            text-align: center;
+        }
+
+        #welcome h2 {
+            font-size: 28px;
+
+            margin-bottom: 15px;
+        }
+
+        #loginTime {
+            margin: 15px 0;
+
+            font-size: 14px;
+
+            opacity: 0.8;
+        }
+
+        .logout-btn {
+            background: white;
+
+            color: #5b4bb7;
+        }
+
+        /* Dark mode */
+
+        body.dark {
+            background: linear-gradient(135deg, #141e30, #243b55);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- LOGIN PAGE -->
+
+<div class="container" id="loginPage">
+
+    <div class="logo">
+        🔐
+    </div>
+
+    <h2>Welcome Back!</h2>
+
+    <p class="subtitle">
+        Login to continue
+    </p>
+
+
+    <!-- Username -->
+
+    <div class="input-box">
+
+        <label>Username</label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter username"
+        >
+
+    </div>
+
+
+    <!-- Password -->
+
+    <div class="input-box">
+
+        <label>Password</label>
+
+        <div class="password-container">
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+            >
+
+            <span
+                class="eye"
+                onclick="togglePassword()"
+                id="eye"
+            >
+                👁️
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- Remember + Forgot -->
+
+    <div class="options">
+
+        <label class="remember">
+
+            <input
+                type="checkbox"
+                id="remember"
+            >
+
+            Remember Me
+
+        </label>
+
+
+        <span
+            class="forgot"
+            onclick="forgotPassword()"
+        >
+            Forgot Password?
+        </span>
+
+    </div>
+
+
+    <!-- Login -->
+
+    <button
+        class="login-btn"
+        onclick="login()"
+    >
+        Login
+    </button>
+
+
+    <!-- Signup -->
+
+    <button
+        class="signup-btn"
+        onclick="signup()"
+    >
+        Create Account
+    </button>
+
+
+    <!-- Theme -->
+
+    <button
+        class="theme-btn"
+        onclick="toggleTheme()"
+    >
+        🌙 Dark / Light Mode
+    </button>
+
+
+    <p id="message"></p>
+
+</div>
+
+
+
+<!-- WELCOME PAGE -->
+
+<div class="container" id="welcome">
+
+    <div class="logo">
+        🎉
+    </div>
+
+    <h2>
+        Login Successful!
+    </h2>
+
+    <p id="welcomeUser"></p>
+
+    <p id="loginTime"></p>
+
+    <button
+        class="logout-btn"
+        onclick="logout()"
+    >
+        🚪 Logout
+    </button>
+
+</div>
+
+
+
+<script>
+
+    /* Login details */
+
+    const correctUsername = "jobinselvanose";
+
+    const correctPassword = "python123";
+
+
+    /* Failed attempts */
+
+    let attempts = 0;
+
+    let locked = false;
+
+
+
+    /* Show / Hide Password */
+
+    function togglePassword() {
+
+        let password =
+            document.getElementById("password");
+
+        let eye =
+            document.getElementById("eye");
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            eye.innerHTML = "🙈";
+
+        }
+
+        else {
+
+            password.type = "password";
+
+            eye.innerHTML = "👁️";
+
+        }
+
+    }
+
+
+
+    /* Login */
+
+    function login() {
+
+        if (locked) {
+
+            return;
+
+        }
+
+
+        let username =
+            document.getElementById("username").value.trim();
+
+        let password =
+            document.getElementById("password").value;
+
+        let message =
+            document.getElementById("message");
+
+
+        /* Empty fields */
+
+        if (username === "" || password === "") {
+
+            message.style.color = "yellow";
+
+            message.innerHTML =
+                "Please enter username and password.";
+
+            return;
+
+        }
+
+
+        /* Correct login */
+
+        if (
+            username === correctUsername &&
+            password === correctPassword
+        ) {
+
+            message.style.color = "lightgreen";
+
+            message.innerHTML =
+                "Login successful!";
+
+
+            setTimeout(function() {
+
+                document.getElementById("loginPage")
+                    .style.display = "none";
+
+                document.getElementById("welcome")
+                    .style.display = "block";
+
+
+                document.getElementById("welcomeUser")
+                    .innerHTML =
+                    "Welcome, " + username + " 👋";
+
+
+                let now = new Date();
+
+
+                document.getElementById("loginTime")
+                    .innerHTML =
+                    "Login time: " +
+                    now.toLocaleString();
+
+
+            }, 500);
+
+
+            /* Remember Me */
+
+            if (
+                document.getElementById("remember").checked
+            ) {
+
+                localStorage.setItem(
+                    "savedUsername",
+                    username
+                );
+
+            }
+
+        }
+
+
+        /* Wrong login */
+
+        else {
+
+            attempts++;
+
+            message.style.color = "#ffcccc";
+
+
+            if (attempts >= 3) {
+
+                locked = true;
+
+                message.innerHTML =
+                    "🔒 Too many attempts. Try again after 30 seconds.";
+
+
+                setTimeout(function() {
+
+                    attempts = 0;
+
+                    locked = false;
+
+                    message.innerHTML = "";
+
+                }, 30000);
+
+            }
+
+            else {
+
+                message.innerHTML =
+                    "❌ Wrong username or password.";
+
+            }
+
+        }
+
+    }
+
+
+
+    /* Forgot Password */
+
+    function forgotPassword() {
+
+        alert(
+            "For this demo, the password is: python123"
+        );
+
+    }
+
+
+
+    /* Create Account */
+
+    function signup() {
+
+        alert(
+            "Sign Up feature can be connected to a database later."
+        );
+
+    }
+
+
+
+    /* Dark / Light */
+
+    function toggleTheme() {
+
+        document.body.classList.toggle("dark");
+
+    }
+
+
+
+    /* Logout */
+
+    function logout() {
+
+        document.getElementById("welcome")
+            .style.display = "none";
+
+        document.getElementById("loginPage")
+            .style.display = "block";
+
+
+        document.getElementById("password").value = "";
+
+        document.getElementById("message").innerHTML = "";
+
+    }
+
+
+
+    /* Enter key */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                login();
+
+            }
+
+        }
+    );
+
+
+
+    /* Remember username */
+
+    window.onload = function() {
+
+        let savedUsername =
+            localStorage.getItem("savedUsername");
+
+
+        if (savedUsername) {
+
+            document.getElementById("username").value =
+                savedUsername;
+
+            document.getElementById("remember").checked =
+                true;
+
+        }
+
+    };
+
+
+</script>
+
+
+</body>
+
+</html>
